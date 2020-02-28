@@ -14,7 +14,22 @@ var words = [
 
 // Write a function uniqueArray that receives an array of words as a parameter. And remove the duplicates, and return a new array. 
 // (indexOf)
-
+function uniqueArray(arr) {
+  return arr.reduce((acc, elem, index, arr) =>{
+    var temp = [];
+    var ind = arr.indexOf(elem);
+    while(ind != -1) {
+      temp.push(index);
+      ind = arr.indexOf(elem, ind+1);
+    }
+    if(temp.length == 1) {
+      acc.push(elem);
+    }
+    return acc;
+  }, []);
+}
+var res = uniqueArray(words);
+console.log(res);
 
 
 var words2 = [
@@ -29,8 +44,15 @@ var words2 = [
 ];
 
 // Write a function doesWordExist that will take in an array of words as one argument, and a word to search for as the other. Return true if it exists, otherwise, return false. Don't use indexOf for this one.
-
-
+function doesWordExist(arr, word) {
+  return arr.reduce((acc, elem) => {
+    if(elem == word)
+      acc = true;
+    return acc;
+  }, false);
+}
+console.log(doesWordExist(words2, "subsets"));
+console.log(doesWordExist(words2, "subset"));
 
 
 var words3 = [
@@ -50,7 +72,15 @@ var words3 = [
 
 // Write a function howManyTimes that will take in an array of words as one argument, and a word to search for as the other. The function will return the number of times that word appears in the array.
 
-
+function howManyTimes(arr, word) {
+  return arr.reduce((acc, elem) => {
+    if(elem == word)
+      acc++;
+    return acc;
+  }, 0);
+}
+console.log(howManyTimes(words3, "matter"));
+console.log(howManyTimes(words3, "truth"));
 
 
 
@@ -73,8 +103,14 @@ let data = [
     pop: 263991379,
   }
 ]
+var res = data.reduce((acc, elem)=>{
+  if(elem.country != 'China') {
+    acc += elem.pop;
+  }
+  return acc;
+},0);
 
-
+console.log(res);
 // Use reduce method and summorize the collection like
 // { banana: 2, cherry: 3, orange: 3, apple: 2, fig: 1 }
 const fruitBasket = [
@@ -90,8 +126,15 @@ const fruitBasket = [
   'orange',
   'fig'
 ];
-
-
+var obj = new Object();
+var res = (fruitBasket.reduce((acc, elem) => {
+  if(Object.keys(obj).indexOf(elem) !=-1)
+    obj[elem]++;
+  else
+    obj[elem] = 1;
+  return obj;
+}, obj));
+console.log(res);
 
 // Bonus Question (Solve only if you have time)
 var matrix = [
@@ -118,3 +161,11 @@ var matrix = [
 ];
 // In the 20×20 grid above What is the greatest product of four adjacent numbers in the same direction (up, down, left, right)?
 // Write a function greatestProduct to find the answer!
+var product = 0;
+for(var i = 0; i < matrix.length-1; i++) {
+  for(var j = 0; j < matrix[0].length-1; j++) {
+    if(product< matrix[i][j]*matrix[i+1][j]*matrix[i][j+1]*matrix[i+1][j+1])
+      product = matrix[i][j]*matrix[i+1][j]*matrix[i][j+1]*matrix[i+1][j+1];
+  }
+}
+console.log(product);

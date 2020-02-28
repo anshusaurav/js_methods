@@ -11,36 +11,86 @@
     <script>
       // Go through todo.md before start solving.
       function countAllPeople() {
-        // your code goes here
-        console.log(got);
+        return got.houses.reduce((acc,elem) => {
+          acc += elem.people.length;
+          return acc;
+        }, 0);
       }
 
       function peopleByHouses() {
-        // your code goes here
+        //var houseList = ["Starks", "Lannisters", "Baratheons", "Targaryens", "Greyjoys", "Tyrells", "Tullys", "Redwyne", "Freys", "Arryns", "Dothrakis"];
+        return  got.houses.reduce((acc,elem) => {
+          acc[elem.name] = elem.people.length;
+          return acc;
+        }, {});
       }
 
       function everyone() {
+        return  res = got.houses.reduce((acc,elem) => {
+          var newArr = elem.people;
+          newArr.forEach(element => {
+            acc.push(element.name);
+          });
+          return acc;
+        }, []);
         // your code goes here
       }
 
       function nameWithS() {
-        // your code goes here
+        return  res = got.houses.reduce((acc,elem) => {
+          var newArr = elem.people;
+          newArr.forEach(element => {
+            if(element.name.includes('S') || element.name.includes('s'))
+            acc.push(element.name);
+          });
+          return acc;
+        }, []);
       }
 
       function nameWithA() {
+        return res = got.houses.reduce((acc,elem) => {
+          var newArr = elem.people;
+          newArr.forEach(element => {
+            if(element.name.includes('A') || element.name.includes('a'))
+            acc.push(element.name);
+          });
+          return acc;
+        }, []);
         // your code goes here
       }
 
       function surnameWithS() {
-        // your code goes here
+        return  res = got.houses.reduce((acc,elem) => {
+          var newArr = elem.people;
+          newArr.forEach(element => {
+            var surname = element.name.split(' ')[1];
+            if(surname.startsWith('S') || surname.startsWith('s'))
+            acc.push(element.name);
+          });
+          return acc;
+        }, []);
       }
 
       function surnameWithA() {
-        // your code goes here
+        return res = got.houses.reduce((acc,elem) => {
+          var newArr = elem.people;
+          newArr.forEach(element => {
+            var surname = element.name.split(' ')[1];
+            if(surname.startsWith('A') || surname.startsWith('a'))
+            acc.push(element.name);
+          });
+          return acc;
+        }, []);
       }
 
       function peopleNameOfAllHouses() {
-        // your code goes here
+        return res = got.houses.reduce((acc,elem) => {
+          var newArr = elem.people;
+          var newObj = new Object();
+          acc[elem.name] = newArr.map(element => {return element.name;});
+          return acc;
+        }, {});
+        
       }
 
       // Testing your result after writing your function
