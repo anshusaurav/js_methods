@@ -12,7 +12,7 @@ var words = [
 console.log(words.reduce((acc, elem)=>{
   if(elem.length > acc.length)
     acc = elem;
-  return acc;
+    return acc;
   }, ""));
 
 
@@ -25,7 +25,7 @@ function sumArray()
 {
   return numbers1.reduce((acc, elem)=> {
     acc += elem;
-  return acc;
+    return acc;
   }, 0);
 }
 console.log(sumArray()/numbers1.length);

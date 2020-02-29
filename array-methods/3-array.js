@@ -161,11 +161,66 @@ var matrix = [
 ];
 // In the 20×20 grid above What is the greatest product of four adjacent numbers in the same direction (up, down, left, right)?
 // Write a function greatestProduct to find the answer!
-var product = 0;
-for(var i = 0; i < matrix.length-1; i++) {
-  for(var j = 0; j < matrix[0].length-1; j++) {
-    if(product< matrix[i][j]*matrix[i+1][j]*matrix[i][j+1]*matrix[i+1][j+1])
-      product = matrix[i][j]*matrix[i+1][j]*matrix[i][j+1]*matrix[i+1][j+1];
+function greatestProduct(mat) {
+  var productMax = 0;
+  var dx = [0, 0, 1, -1];
+  var dy = [1, -1, 0, 0];
+  var res = [];
+  for(var i = 0; i < matrix.length; i++) {
+    var resTmp = [];
+    for(var j = 0; j < matrix[0].length; j++) {
+      //Check right
+      var pro = 0;
+
+      for(var z = 0; z < 4; z++) {
+        var productTmp = 1;
+
+        for(var k = 0; k < 4; k++) {
+          if(isValid(i + k*dx[z], j + k*dy[z], matrix.length, matrix[0].length))
+            productTmp *= matrix[i+k*dx[z]][j+k*dy[z]]; 
+          else
+            productTmp = 0;
+        }
+        productMax = Math.max(productMax, productTmp);
+      }
+    }
   }
+  return productMax;
 }
-console.log(product);
+
+function isValid(x,y,h,w) {
+  return x >= 0 && x < h && y >= 0 && y < w;
+}
+console.log(greatestProduct(matrix));
+//51267216
+//     //Check left
+//     productTmp = 1;
+//     for(var k = 0; k < 4; k++) {
+//       if(isValid(i, j - k, matrix.length, matrix[0].length))
+//         productTmp *= matrix[i][j-k]; 
+//       else
+//         productTmp = 0;
+//     }
+//     productMax = Math.max(productMax, productTmp);
+
+//     //Check down
+//     productTmp = 1;
+//     for(var k = 0; k < 4; k++) {
+//       if(isValid(i + k, j, matrix.length, matrix[0].length))
+//         productTmp *= matrix[i+k][j]; 
+//       else
+//         productTmp = 0;
+//     }
+//     productMax = Math.max(productMax, productTmp);
+
+//     //Check up
+//     productTmp = 1;
+//     for(var k = 0; k < 4; k++) {
+//       if(isValid(i - k, j, matrix.length, matrix[0].length))
+//         productTmp *= matrix[i-k][j]; 
+//       else
+//         productTmp = 0;
+//     }
+//     productMax = Math.max(productMax, productTmp);
+//   }
+// }

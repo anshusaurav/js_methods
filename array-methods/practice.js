@@ -36,6 +36,50 @@ console.log(pizzas.filter((elem, index) => {return elem.startsWith('M')? true:fa
 console.log(pizzas.filter((elem, index) => {return elem.indexOf('a')!= -1? true:false;}));
 
 
+//reduce
+console.log(pizzas.reduce((acc, pizza) =>{
+  if(!acc[pizza])
+     acc[pizza] = 1;
+  else
+     acc[pizza] = acc[pizza] + 1;
+  return acc;
+},{}));
+
+console.log(pizzas.reduce((acc, pizza) =>{
+  var arr = pizza.split(' ');
+  arr.forEach((element) => {
+    acc.push(element);
+  });
+  return acc;
+},[]));
+
+
+console.log(pizzas.reduce((acc, pizza) =>{
+  if(pizza.length > acc.length)
+    acc = pizza;
+  return acc;
+}));
+
+
+console.log(pizzas.reduce((acc, pizza) =>{
+  if(pizza.length < acc.length)
+    acc = pizza;
+  return acc;
+}));
+
+console.log(pizzas.reduce((acc, pizza) =>{
+  acc.push(pizza.toLocaleUpperCase());
+  return acc;
+},[]));
+
+
+//sort
+var pizzas1 = [...pizzas]
+console.log(pizzas1.sort((a,b)=>  a.length - b.length));
+
+var pizzas2 = [...pizzas]
+console.log(pizzas2.sort((a,b)=>  a.localeCompare(b)));
+
 
 var cuts = [
   "Chuck",
